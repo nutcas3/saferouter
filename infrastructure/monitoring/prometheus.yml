@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'proxy'
+    static_configs:
+      - targets: ['proxy:8080']
+    metrics_path: '/metrics'
+  
+  - job_name: 'ner-service'
+    static_configs:
+      - targets: ['ner-service:8081']
+    metrics_path: '/metrics'
+  
+  - job_name: 'vault'
+    static_configs:
+      - targets: ['vault:8082']
+    metrics_path: '/metrics'
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
