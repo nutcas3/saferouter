@@ -1,0 +1,45 @@
+# Environment
+.env
+.env.local
+
+# Logs
+logs/
+*.log
+
+# Models
+models/
+
+# Build artifacts - Go
+services/proxy/proxy
+
+# Build artifacts - Rust
+services/vault/target/
+services/vault/Cargo.lock
+
+# Build artifacts - Python
+services/ner-service/__pycache__/
+services/ner-service/*.pyc
+services/ner-service/.pytest_cache/
+
+# Build artifacts - React
+services/web-dashboard/build/
+services/web-dashboard/node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+*.sock
+
+# Terraform
+infrastructure/terraform/.terraform/
+infrastructure/terraform/*.tfstate
+infrastructure/terraform/*.tfstate.backup
