@@ -38,23 +38,23 @@ export function Features() {
     <div className="py-24 bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-ethereal mb-4">
+          <h2 className="text-4xl font-bold text-white mb-4">
             Enterprise-Grade Privacy
           </h2>
-          <p className="text-xl text-scribe max-w-2xl mx-auto">
+          <p className="text-xl text-moon-glow max-w-2xl mx-auto">
             Built for developers who need to protect sensitive data without sacrificing performance
           </p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className="bg-slate-exp/30 border-scribe/50 hover:border-hot-coral/50 transition-all">
+            <Card key={index} className="bg-kyuri-green/40 border-dirty-green/50 hover:border-macaw-green transition-all">
               <CardHeader>
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <CardTitle className="text-ethereal">{feature.title}</CardTitle>
+                <CardTitle className="text-white">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-light-spirit">
+                <CardDescription className="text-green-gecko">
                   {feature.description}
                 </CardDescription>
               </CardContent>

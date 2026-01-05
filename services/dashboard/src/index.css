@@ -2,57 +2,63 @@
 
 @layer base {
   :root {
-    --ethereal-white: #e7f3f3;
-    --light-spirit: #c4cad2;
-    --scribe: #9eaab7;
-    --slate-expectations: #6d7f8d;
-    --hot-coral: #ef5b56;
-    --indigo-iron: #393f4d;
+    --moon-glow: #f4f4cf;
+    --green-gecko: #cad37d;
+    --macaw-green: #9fa83e;
+    --dirty-green: #6b8229;
+    --kyuri-green: #485d19;
+    --darkest-forest: #282e0a;
     
-    --background: 210 20% 23%;
-    --foreground: 180 20% 93%;
-    --card: 210 20% 23%;
-    --card-foreground: 180 20% 93%;
-    --popover: 210 20% 23%;
-    --popover-foreground: 180 20% 93%;
-    --primary: 3 84% 64%;
-    --primary-foreground: 180 20% 93%;
-    --secondary: 210 15% 45%;
-    --secondary-foreground: 180 20% 93%;
-    --muted: 210 15% 45%;
-    --muted-foreground: 200 15% 70%;
-    --accent: 3 84% 64%;
-    --accent-foreground: 180 20% 93%;
+    --background: 48 45% 10%;
+    --foreground: 0 0% 100%;
+    --card: 48 45% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 48 45% 10%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 66 44% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 66 60% 60%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 66 44% 49%;
+    --muted-foreground: 60 56% 91%;
+    --accent: 66 44% 49%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 180 20% 93%;
-    --border: 210 15% 45%;
-    --input: 210 15% 45%;
-    --ring: 3 84% 64%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 66 44% 49%;
+    --input: 66 44% 49%;
+    --ring: 66 44% 49%;
+  }
+  
+  * {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 }
 
 @layer utilities {
   .bg-grid-white\/\[0\.02\] {
-    background-image: linear-gradient(to right, rgba(231, 243, 243, 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(231, 243, 243, 0.02) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgba(244, 244, 207, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(244, 244, 207, 0.03) 1px, transparent 1px);
   }
   
-  .text-ethereal { color: var(--ethereal-white); }
-  .text-light-spirit { color: var(--light-spirit); }
-  .text-scribe { color: var(--scribe); }
-  .text-slate-exp { color: var(--slate-expectations); }
-  .text-hot-coral { color: var(--hot-coral); }
-  .text-indigo-iron { color: var(--indigo-iron); }
+  .text-moon-glow { color: var(--moon-glow); }
+  .text-green-gecko { color: var(--green-gecko); }
+  .text-macaw-green { color: var(--macaw-green); }
+  .text-dirty-green { color: var(--dirty-green); }
+  .text-kyuri-green { color: var(--kyuri-green); }
+  .text-darkest-forest { color: var(--darkest-forest); }
   
-  .bg-ethereal { background-color: var(--ethereal-white); }
-  .bg-light-spirit { background-color: var(--light-spirit); }
-  .bg-scribe { background-color: var(--scribe); }
-  .bg-slate-exp { background-color: var(--slate-expectations); }
-  .bg-hot-coral { background-color: var(--hot-coral); }
-  .bg-indigo-iron { background-color: var(--indigo-iron); }
+  .bg-moon-glow { background-color: var(--moon-glow); }
+  .bg-green-gecko { background-color: var(--green-gecko); }
+  .bg-macaw-green { background-color: var(--macaw-green); }
+  .bg-dirty-green { background-color: var(--dirty-green); }
+  .bg-kyuri-green { background-color: var(--kyuri-green); }
+  .bg-darkest-forest { background-color: var(--darkest-forest); }
   
-  .border-hot-coral { border-color: var(--hot-coral); }
-  .border-scribe { border-color: var(--scribe); }
+  .border-moon-glow { border-color: var(--moon-glow); }
+  .border-green-gecko { border-color: var(--green-gecko); }
+  .border-macaw-green { border-color: var(--macaw-green); }
+  .border-dirty-green { border-color: var(--dirty-green); }
 }
 @import "tw-animate-css";
 

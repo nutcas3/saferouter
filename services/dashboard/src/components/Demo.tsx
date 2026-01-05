@@ -48,31 +48,31 @@ export function Demo() {
     <div id="demo" className="py-24 bg-slate-950/50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-ethereal mb-4">
+          <h2 className="text-4xl font-bold text-white mb-4">
             Try It Live
           </h2>
-          <p className="text-xl text-scribe">
+          <p className="text-xl text-moon-glow">
             See how SafeRoute detects and anonymizes PII in real-time
           </p>
         </div>
 
-        <Card className="bg-slate-exp/30 border-scribe/50">
+        <Card className="bg-kyuri-green/40 border-dirty-green/50">
           <CardHeader>
-            <CardTitle className="text-ethereal">Interactive Demo</CardTitle>
-            <CardDescription className="text-light-spirit">
+            <CardTitle className="text-white">Interactive Demo</CardTitle>
+            <CardDescription className="text-green-gecko">
               Enter text with PII or use the example below
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-light-spirit mb-2">
+              <label className="block text-sm font-medium text-moon-glow mb-2">
                 Original Text (with PII)
               </label>
               <Textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 rows={6}
-                className="bg-indigo-iron/50 border-scribe text-ethereal placeholder:text-scribe"
+                className="bg-darkest-forest/60 border-dirty-green text-white placeholder:text-green-gecko/60"
                 placeholder="Enter text containing PII..."
               />
             </div>
@@ -81,14 +81,14 @@ export function Demo() {
               <Button
                 onClick={handleAnonymize}
                 disabled={loading || !inputText}
-                className="bg-hot-coral hover:bg-hot-coral/90 text-ethereal"
+                className="bg-macaw-green hover:bg-dirty-green text-white font-semibold"
               >
                 {loading ? 'Processing...' : 'Anonymize PII'}
               </Button>
               <Button
                 onClick={handleReset}
                 variant="outline"
-                className="border-scribe text-light-spirit hover:bg-scribe/20"
+                className="border-green-gecko text-moon-glow hover:bg-macaw-green/20 font-medium"
               >
                 Reset
               </Button>
@@ -97,11 +97,11 @@ export function Demo() {
             {anonymizedText && (
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-medium text-light-spirit">
+                  <label className="block text-sm font-medium text-moon-glow">
                     Anonymized Output
                   </label>
                   {detectedCount > 0 && (
-                    <span className="text-sm text-hot-coral">
+                    <span className="text-sm text-green-gecko font-medium">
                       ✓ Detected {detectedCount} PII entities
                     </span>
                   )}
@@ -110,18 +110,18 @@ export function Demo() {
                   value={anonymizedText}
                   readOnly
                   rows={6}
-                  className="bg-indigo-iron/50 border-hot-coral/50 text-hot-coral font-mono"
+                  className="bg-darkest-forest/60 border-macaw-green/60 text-green-gecko font-mono"
                 />
               </div>
             )}
 
-            <div className="bg-indigo-iron/50 rounded-lg p-4 border border-scribe/50">
-              <h4 className="text-sm font-semibold text-ethereal mb-2">Detected PII Types:</h4>
+            <div className="bg-darkest-forest/60 rounded-lg p-4 border border-dirty-green/50">
+              <h4 className="text-sm font-semibold text-white mb-2">Detected PII Types:</h4>
               <div className="flex flex-wrap gap-2">
                 {['SSN', 'Email', 'Phone', 'Name', 'Credit Card', 'Date', 'MRN'].map((type) => (
                   <span
                     key={type}
-                    className="px-3 py-1 bg-hot-coral/20 border border-hot-coral/30 rounded-full text-xs text-light-spirit"
+                    className="px-3 py-1 bg-macaw-green/30 border border-green-gecko/40 rounded-full text-xs text-moon-glow font-medium"
                   >
                     {type}
                   </span>
@@ -132,34 +132,34 @@ export function Demo() {
         </Card>
 
         <div className="mt-12 grid md:grid-cols-3 gap-6">
-          <Card className="bg-slate-exp/30 border-scribe/50">
+          <Card className="bg-kyuri-green/40 border-dirty-green/50">
             <CardHeader>
-              <CardTitle className="text-lg text-ethereal">1. Detect</CardTitle>
+              <CardTitle className="text-lg text-white">1. Detect</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-light-spirit">
+              <p className="text-sm text-green-gecko">
                 NER service scans text for PII patterns using JAX-powered regex
               </p>
             </CardContent>
           </Card>
           
-          <Card className="bg-slate-exp/30 border-scribe/50">
+          <Card className="bg-kyuri-green/40 border-dirty-green/50">
             <CardHeader>
-              <CardTitle className="text-lg text-ethereal">2. Encrypt</CardTitle>
+              <CardTitle className="text-lg text-white">2. Encrypt</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-light-spirit">
+              <p className="text-sm text-green-gecko">
                 Vault stores encrypted entities with AES-256-GCM, 60s TTL
               </p>
             </CardContent>
           </Card>
           
-          <Card className="bg-slate-exp/30 border-scribe/50">
+          <Card className="bg-kyuri-green/40 border-dirty-green/50">
             <CardHeader>
-              <CardTitle className="text-lg text-ethereal">3. Restore</CardTitle>
+              <CardTitle className="text-lg text-white">3. Restore</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-light-spirit">
+              <p className="text-sm text-green-gecko">
                 Original PII restored in LLM response, then auto-purged
               </p>
             </CardContent>
