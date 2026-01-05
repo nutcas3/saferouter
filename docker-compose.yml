@@ -1,0 +1,101 @@
+services:
+  proxy:
+    build: ./services/proxy
+    ports:
+      - "8080:8080"
+    environment:
+      NER_SERVICE_URL: http://ner-service:8081
+      VAULT_SERVICE_URL: http://vault:8082
+      LLM_PROVIDER_URL: ${LLM_PROVIDER_URL:-https://api.anthropic.com}
+      LLM_API_KEY: ${LLM_API_KEY}
+      REDIS_URL: redis://redis:6379
+      LOG_LEVEL: info
+    depends_on:
+      - ner-service
+      - vault
+      - redis
+    networks:
+      - saferoute
+
+  ner-service:
+    build: ./services/ner-service
+    ports:
+      - "8081:8081"
+    environment:
+      MODEL_PATH: /models/ner-model
+      DEVICE: cpu
+      WORKERS: 4
+    volumes:
+      - ./models:/models
+    networks:
+      - saferoute
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+
+  vault:
+    build: ./services/vault
+    ports:
+      - "8082:8082"
+    environment:
+      MASTER_KEY: ${VAULT_MASTER_KEY}
+      TTL_SECONDS: 60
+      MAX_ENTRIES: 10000
+    networks:
+      - saferoute
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  web-dashboard:
+    build: ./services/web-dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:8080
+    depends_on:
+      - proxy
+    networks:
+      - saferoute
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    networks:
+      - saferoute
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infrastructure/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - saferoute
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_INSTALL_PLUGINS: grafana-clock-panel
+    volumes:
+      - ./infrastructure/monitoring/grafana-dashboards:/etc/grafana/provisioning/dashboards
+      - grafana-data:/var/lib/grafana
+    networks:
+      - saferoute
+
+networks:
+  saferoute:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:
