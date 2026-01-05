@@ -1,0 +1,13 @@
+{
+  "name": "Medical NER Dataset",
+  "version": "1.0.0",
+  "patterns": {
+    "MRN": "Medical Record Number",
+    "PATIENT_ID": "Patient Identifier",
+    "DIAGNOSIS": "ICD Diagnosis Code"
+  },
+  "examples": [
+    "Patient MRN: 1234567890 diagnosed with ICD-10: E11.9",
+    "PT-ID: ABC-123456 requires follow-up"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Legal NER Dataset",
+  "version": "1.0.0",
+  "patterns": {
+    "CASE_NUMBER": "Court Case Number",
+    "BAR_NUMBER": "Attorney Bar Number",
+    "DOCKET": "Docket Number"
+  },
+  "examples": [
+    "Case 23-CV-123456 filed in district court",
+    "Attorney Bar #12345678 representing plaintiff",
+    "Docket #2023-ABC-001 scheduled for hearing"
+  ]
+}
