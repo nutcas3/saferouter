@@ -26,23 +26,23 @@ export function Testimonials() {
     <div className="py-24 bg-slate-950/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-ethereal mb-4">
             Loved by Developers & Security Teams
           </h2>
-          <p className="text-xl text-slate-400">
+          <p className="text-xl text-scribe">
             See what teams are saying about SafeRoute
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-slate-800/30 border-slate-700/50">
+            <Card key={index} className="bg-slate-exp/30 border-scribe/50">
               <CardContent className="pt-6">
                 <div className="text-4xl mb-4">{testimonial.avatar}</div>
-                <p className="text-slate-300 mb-6 italic">"{testimonial.quote}"</p>
+                <p className="text-light-spirit mb-6 italic">"{testimonial.quote}"</p>
                 <div>
-                  <p className="text-white font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-slate-400">{testimonial.role}</p>
+                  <p className="text-ethereal font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-scribe">{testimonial.role}</p>
                 </div>
               </CardContent>
             </Card>

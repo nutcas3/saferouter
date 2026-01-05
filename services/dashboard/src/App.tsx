@@ -8,7 +8,7 @@ import { Footer } from './components/Footer'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-iron via-slate-exp to-indigo-iron" style={{ backgroundColor: '#393f4d' }}>
       <Hero />
       <Features />
       <Stats />

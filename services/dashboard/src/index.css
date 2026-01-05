@@ -2,33 +2,57 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 271 91% 65%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --ethereal-white: #e7f3f3;
+    --light-spirit: #c4cad2;
+    --scribe: #9eaab7;
+    --slate-expectations: #6d7f8d;
+    --hot-coral: #ef5b56;
+    --indigo-iron: #393f4d;
+    
+    --background: 210 20% 23%;
+    --foreground: 180 20% 93%;
+    --card: 210 20% 23%;
+    --card-foreground: 180 20% 93%;
+    --popover: 210 20% 23%;
+    --popover-foreground: 180 20% 93%;
+    --primary: 3 84% 64%;
+    --primary-foreground: 180 20% 93%;
+    --secondary: 210 15% 45%;
+    --secondary-foreground: 180 20% 93%;
+    --muted: 210 15% 45%;
+    --muted-foreground: 200 15% 70%;
+    --accent: 3 84% 64%;
+    --accent-foreground: 180 20% 93%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 271 91% 65%;
+    --destructive-foreground: 180 20% 93%;
+    --border: 210 15% 45%;
+    --input: 210 15% 45%;
+    --ring: 3 84% 64%;
   }
 }
 
 @layer utilities {
   .bg-grid-white\/\[0\.02\] {
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgba(231, 243, 243, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(231, 243, 243, 0.02) 1px, transparent 1px);
   }
+  
+  .text-ethereal { color: var(--ethereal-white); }
+  .text-light-spirit { color: var(--light-spirit); }
+  .text-scribe { color: var(--scribe); }
+  .text-slate-exp { color: var(--slate-expectations); }
+  .text-hot-coral { color: var(--hot-coral); }
+  .text-indigo-iron { color: var(--indigo-iron); }
+  
+  .bg-ethereal { background-color: var(--ethereal-white); }
+  .bg-light-spirit { background-color: var(--light-spirit); }
+  .bg-scribe { background-color: var(--scribe); }
+  .bg-slate-exp { background-color: var(--slate-expectations); }
+  .bg-hot-coral { background-color: var(--hot-coral); }
+  .bg-indigo-iron { background-color: var(--indigo-iron); }
+  
+  .border-hot-coral { border-color: var(--hot-coral); }
+  .border-scribe { border-color: var(--scribe); }
 }
 @import "tw-animate-css";
 
