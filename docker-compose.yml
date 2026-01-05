@@ -50,12 +50,12 @@ services:
         limits:
           memory: 512M
 
-  web-dashboard:
-    build: ./services/web-dashboard
+  dashboard:
+    build: ./services/dashboard
     ports:
       - "3000:3000"
     environment:
-      REACT_APP_API_URL: http://localhost:8080
+      VITE_API_URL: http://localhost:8080
     depends_on:
       - proxy
     networks:
