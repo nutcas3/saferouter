@@ -9,18 +9,18 @@ export function Hero() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-macaw-green/20 border border-green-gecko/40 mb-8">
             <div className="w-2 h-2 rounded-full bg-green-gecko animate-pulse" />
-            <span className="text-sm text-moon-glow font-medium">Zero-knowledge privacy for LLMs</span>
+            <span className="text-sm text-black font-medium">Zero-knowledge privacy for LLMs</span>
           </div>
           
           <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-white mb-6">
             Protect PII Before It
             <br />
-            <span className="bg-gradient-to-r from-green-gecko via-moon-glow to-green-gecko bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-gecko via-white to-green-gecko bg-clip-text text-transparent">
               Reaches Your LLM
             </span>
           </h1>
           
-          <p className="text-xl text-moon-glow max-w-2xl mx-auto mb-10">
+          <p className="text-xl text-black max-w-2xl mx-auto mb-10">
             Enterprise-grade privacy middleware that strips sensitive data before sending to LLMs 
             and restores it on the way back. HIPAA & GDPR compliant.
           </p>

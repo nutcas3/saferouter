@@ -7,7 +7,7 @@ export function CTA() {
         <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
           Ready to Protect Your Users' Privacy?
         </h2>
-        <p className="text-xl text-moon-glow mb-10 max-w-2xl mx-auto">
+        <p className="text-xl text-black mb-10 max-w-2xl mx-auto">
           Install SafeRoute in under 5 minutes and start protecting PII in your LLM applications today.
         </p>
         
@@ -28,7 +28,7 @@ export function CTA() {
           <Button 
             size="lg" 
             variant="outline" 
-            className="border-moon-glow/60 text-moon-glow hover:bg-macaw-green/20 px-8 py-6 text-lg font-medium"
+            className="border-black/60 text-black hover:bg-macaw-green/20 px-8 py-6 text-lg font-medium"
             onClick={() => window.open('https://docs.saferoute.io', '_blank')}
           >
             Read Documentation

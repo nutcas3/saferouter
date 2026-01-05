@@ -51,7 +51,7 @@ export function Demo() {
           <h2 className="text-4xl font-bold text-white mb-4">
             Try It Live
           </h2>
-          <p className="text-xl text-moon-glow">
+          <p className="text-xl text-black">
             See how SafeRoute detects and anonymizes PII in real-time
           </p>
         </div>
@@ -65,7 +65,7 @@ export function Demo() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-moon-glow mb-2">
+              <label className="block text-sm font-medium text-black mb-2">
                 Original Text (with PII)
               </label>
               <Textarea
@@ -88,7 +88,7 @@ export function Demo() {
               <Button
                 onClick={handleReset}
                 variant="outline"
-                className="border-green-gecko text-moon-glow hover:bg-macaw-green/20 font-medium"
+                className="border-green-gecko text-black hover:bg-macaw-green/20 font-medium"
               >
                 Reset
               </Button>
@@ -97,7 +97,7 @@ export function Demo() {
             {anonymizedText && (
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-medium text-moon-glow">
+                  <label className="block text-sm font-medium text-black">
                     Anonymized Output
                   </label>
                   {detectedCount > 0 && (
@@ -121,7 +121,7 @@ export function Demo() {
                 {['SSN', 'Email', 'Phone', 'Name', 'Credit Card', 'Date', 'MRN'].map((type) => (
                   <span
                     key={type}
-                    className="px-3 py-1 bg-macaw-green/30 border border-green-gecko/40 rounded-full text-xs text-moon-glow font-medium"
+                    className="px-3 py-1 bg-macaw-green/30 border border-green-gecko/40 rounded-full text-xs text-black font-medium"
                   >
                     {type}
                   </span>
@@ -134,7 +134,7 @@ export function Demo() {
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           <Card className="bg-kyuri-green/40 border-dirty-green/50">
             <CardHeader>
-              <CardTitle className="text-lg text-white">1. Detect</CardTitle>
+              <CardTitle className="text-lg text-black">1. Detect</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-green-gecko">
@@ -145,7 +145,7 @@ export function Demo() {
           
           <Card className="bg-kyuri-green/40 border-dirty-green/50">
             <CardHeader>
-              <CardTitle className="text-lg text-white">2. Encrypt</CardTitle>
+              <CardTitle className="text-lg text-black">2. Encrypt</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-green-gecko">
@@ -156,7 +156,7 @@ export function Demo() {
           
           <Card className="bg-kyuri-green/40 border-dirty-green/50">
             <CardHeader>
-              <CardTitle className="text-lg text-white">3. Restore</CardTitle>
+              <CardTitle className="text-lg text-black">3. Restore</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-green-gecko">

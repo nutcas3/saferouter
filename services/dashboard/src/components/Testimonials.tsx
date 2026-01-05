@@ -1,23 +1,21 @@
 import { Card, CardContent } from './ui/card'
+import { User } from 'lucide-react'
 
 const testimonials = [
   {
     quote: "SafeRoute gave us the confidence to use LLMs in our healthcare application. The zero-knowledge architecture means we never expose patient data.",
     author: "Dr. Sarah Chen",
-    role: "CTO, HealthTech Startup",
-    avatar: "👩‍⚕️"
+    role: "CTO, HealthTech Startup"
   },
   {
     quote: "Sub-20ms latency overhead is incredible. Our users don't even notice the privacy layer, but we sleep better at night knowing PII is protected.",
     author: "Marcus Johnson",
-    role: "Engineering Lead, FinTech",
-    avatar: "👨‍💼"
+    role: "Engineering Lead, FinTech"
   },
   {
     quote: "HIPAA compliance out of the box. SafeRoute handles all the complexity so we can focus on building features instead of security infrastructure.",
     author: "Emily Rodriguez",
-    role: "Head of Security, MedicalAI",
-    avatar: "👩‍💻"
+    role: "Head of Security, MedicalAI"
   }
 ]
 
@@ -29,7 +27,7 @@ export function Testimonials() {
           <h2 className="text-4xl font-bold text-white mb-4">
             Loved by Developers & Security Teams
           </h2>
-          <p className="text-xl text-moon-glow">
+          <p className="text-xl text-black">
             See what teams are saying about SafeRoute
           </p>
         </div>
@@ -38,11 +36,13 @@ export function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="bg-kyuri-green/40 border-dirty-green/50">
               <CardContent className="pt-6">
-                <div className="text-4xl mb-4">{testimonial.avatar}</div>
+                <div className="w-12 h-12 rounded-full bg-macaw-green/20 flex items-center justify-center mb-4">
+                  <User className="w-6 h-6 text-macaw-green" strokeWidth={1.5} />
+                </div>
                 <p className="text-green-gecko mb-6 italic">"{testimonial.quote}"</p>
                 <div>
                   <p className="text-white font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-moon-glow">{testimonial.role}</p>
+                  <p className="text-sm text-black">{testimonial.role}</p>
                 </div>
               </CardContent>
             </Card>
