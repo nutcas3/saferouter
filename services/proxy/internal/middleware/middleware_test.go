@@ -53,9 +53,11 @@ func TestRateLimit(t *testing.T) {
 
 	wrapped := RateLimit(2, 1*time.Second)(handler)
 
+	// Use same IP for all requests to trigger rate limiting
 	// First two requests should succeed
 	for i := range 2 {
 		req := httptest.NewRequest("GET", "/test", nil)
+		req.RemoteAddr = "192.168.1.1:1234"
 		w := httptest.NewRecorder()
 		wrapped.ServeHTTP(w, req)
 
@@ -64,8 +66,9 @@ func TestRateLimit(t *testing.T) {
 		}
 	}
 
-	// Third request should be rate limited
+	// Third request from same IP should be rate limited
 	req := httptest.NewRequest("GET", "/test", nil)
+	req.RemoteAddr = "192.168.1.1:1234"
 	w := httptest.NewRecorder()
 	wrapped.ServeHTTP(w, req)
 
