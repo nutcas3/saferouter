@@ -21,28 +21,28 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <div className="py-24 bg-slate-950/30">
+    <div className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-black-rock mb-4">
             Loved by Developers & Security Teams
           </h2>
-          <p className="text-xl text-black">
+          <p className="text-xl text-slate-shadow">
             See what teams are saying about SafeRoute
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-kyuri-green/40 border-dirty-green/50">
+            <Card key={index} className="bg-blue-silk/20 border-blue-silk">
               <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-macaw-green/20 flex items-center justify-center mb-4">
-                  <User className="w-6 h-6 text-macaw-green" strokeWidth={1.5} />
+                <div className="w-12 h-12 rounded-full bg-klaxosaur-blue/20 flex items-center justify-center mb-4">
+                  <User className="w-6 h-6 text-klaxosaur-blue" strokeWidth={1.5} />
                 </div>
-                <p className="text-green-gecko mb-6 italic">"{testimonial.quote}"</p>
+                <p className="text-slate-shadow mb-6 italic">"{testimonial.quote}"</p>
                 <div>
-                  <p className="text-white font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-black">{testimonial.role}</p>
+                  <p className="text-black-rock font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-western-pursuit">{testimonial.role}</p>
                 </div>
               </CardContent>
             </Card>

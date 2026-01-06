@@ -2,51 +2,51 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 export function Stats() {
   return (
-    <div className="py-16 bg-slate-900/30">
+    <div className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl font-bold text-black-rock mb-4">
             Trusted by Security-Conscious Teams
           </h2>
-          <p className="text-lg text-black">
+          <p className="text-lg text-slate-shadow">
             Processing millions of requests while maintaining zero-knowledge privacy
           </p>
         </div>
 
         <div className="grid md:grid-cols-4 gap-6">
-          <Card className="bg-kyuri-green/40 border-dirty-green/50 text-center">
+          <Card className="bg-blue-silk/20 border-blue-silk text-center">
             <CardHeader>
-              <CardTitle className="text-4xl font-bold text-green-gecko">10M+</CardTitle>
+              <CardTitle className="text-4xl font-bold text-klaxosaur-blue">10M+</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-black">Requests Processed</p>
+              <p className="text-slate-shadow">Requests Processed</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-kyuri-green/40 border-dirty-green/50 text-center">
+          <Card className="bg-blue-silk/20 border-blue-silk text-center">
             <CardHeader>
-              <CardTitle className="text-4xl font-bold text-green-gecko">99.9%</CardTitle>
+              <CardTitle className="text-4xl font-bold text-klaxosaur-blue">99.9%</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-black">Uptime SLA</p>
+              <p className="text-slate-shadow">Uptime SLA</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-kyuri-green/40 border-dirty-green/50 text-center">
+          <Card className="bg-blue-silk/20 border-blue-silk text-center">
             <CardHeader>
-              <CardTitle className="text-4xl font-bold text-green-gecko">&lt;15ms</CardTitle>
+              <CardTitle className="text-4xl font-bold text-klaxosaur-blue">&lt;15ms</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-black">P95 Latency</p>
+              <p className="text-slate-shadow">P95 Latency</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-kyuri-green/40 border-dirty-green/50 text-center">
+          <Card className="bg-blue-silk/20 border-blue-silk text-center">
             <CardHeader>
-              <CardTitle className="text-4xl font-bold text-green-gecko">0</CardTitle>
+              <CardTitle className="text-4xl font-bold text-klaxosaur-blue">0</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-black">Data Breaches</p>
+              <p className="text-slate-shadow">Data Breaches</p>
             </CardContent>
           </Card>
         </div>

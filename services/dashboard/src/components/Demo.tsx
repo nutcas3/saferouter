@@ -45,34 +45,34 @@ export function Demo() {
   }
 
   return (
-    <div id="demo" className="py-24 bg-slate-950/50">
+    <div id="demo" className="py-24 bg-black-rock">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">
             Try It Live
           </h2>
-          <p className="text-xl text-black">
+          <p className="text-xl text-blue-silk">
             See how SafeRoute detects and anonymizes PII in real-time
           </p>
         </div>
 
-        <Card className="bg-kyuri-green/40 border-dirty-green/50">
+        <Card className="bg-slate-shadow/40 border-blue-silk/30">
           <CardHeader>
             <CardTitle className="text-white">Interactive Demo</CardTitle>
-            <CardDescription className="text-green-gecko">
+            <CardDescription className="text-blue-silk">
               Enter text with PII or use the example below
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-black mb-2">
+              <label className="block text-sm font-medium text-blue-silk mb-2">
                 Original Text (with PII)
               </label>
               <Textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 rows={6}
-                className="bg-darkest-forest/60 border-dirty-green text-white placeholder:text-green-gecko/60"
+                className="bg-true-deep/60 border-blue-silk/30 text-white placeholder:text-just-rosey/60"
                 placeholder="Enter text containing PII..."
               />
             </div>
@@ -81,14 +81,14 @@ export function Demo() {
               <Button
                 onClick={handleAnonymize}
                 disabled={loading || !inputText}
-                className="bg-macaw-green hover:bg-dirty-green text-white font-semibold"
+                className="bg-retro-nectarine hover:bg-retro-nectarine/90 text-white font-semibold"
               >
                 {loading ? 'Processing...' : 'Anonymize PII'}
               </Button>
               <Button
                 onClick={handleReset}
                 variant="outline"
-                className="border-green-gecko text-black hover:bg-macaw-green/20 font-medium"
+                className="border-blue-silk text-blue-silk hover:bg-klaxosaur-blue/20 font-medium"
               >
                 Reset
               </Button>
@@ -97,11 +97,11 @@ export function Demo() {
             {anonymizedText && (
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-medium text-black">
+                  <label className="block text-sm font-medium text-blue-silk">
                     Anonymized Output
                   </label>
                   {detectedCount > 0 && (
-                    <span className="text-sm text-green-gecko font-medium">
+                    <span className="text-sm text-klaxosaur-blue font-medium">
                       ✓ Detected {detectedCount} PII entities
                     </span>
                   )}
@@ -110,18 +110,18 @@ export function Demo() {
                   value={anonymizedText}
                   readOnly
                   rows={6}
-                  className="bg-darkest-forest/60 border-macaw-green/60 text-green-gecko font-mono"
+                  className="bg-true-deep/60 border-klaxosaur-blue/60 text-klaxosaur-blue font-mono"
                 />
               </div>
             )}
 
-            <div className="bg-darkest-forest/60 rounded-lg p-4 border border-dirty-green/50">
+            <div className="bg-true-deep/60 rounded-lg p-4 border border-blue-silk/30">
               <h4 className="text-sm font-semibold text-white mb-2">Detected PII Types:</h4>
               <div className="flex flex-wrap gap-2">
                 {['SSN', 'Email', 'Phone', 'Name', 'Credit Card', 'Date', 'MRN'].map((type) => (
                   <span
                     key={type}
-                    className="px-3 py-1 bg-macaw-green/30 border border-green-gecko/40 rounded-full text-xs text-black font-medium"
+                    className="px-3 py-1 bg-klaxosaur-blue/30 border border-blue-silk/40 rounded-full text-xs text-blue-silk font-medium"
                   >
                     {type}
                   </span>

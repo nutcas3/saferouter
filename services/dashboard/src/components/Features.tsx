@@ -36,13 +36,13 @@ const features = [
 
 export function Features() {
   return (
-    <div className="py-24 bg-slate-900/50">
+    <div className="py-24 bg-ghost-grey">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-black-rock mb-4">
             Enterprise-Grade Privacy
           </h2>
-          <p className="text-xl text-black max-w-2xl mx-auto">
+          <p className="text-xl text-slate-shadow max-w-2xl mx-auto">
             Built for developers who need to protect sensitive data without sacrificing performance
           </p>
         </div>
@@ -51,13 +51,13 @@ export function Features() {
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <Card key={index} className="bg-kyuri-green/40 border-dirty-green/50 hover:border-macaw-green transition-all">
+              <Card key={index} className="bg-blue-silk/20 border-blue-silk hover:border-klaxosaur-blue transition-all">
                 <CardHeader>
-                  <Icon className="w-10 h-10 mb-4 text-macaw-green" strokeWidth={1.5} />
-                  <CardTitle className="text-white">{feature.title}</CardTitle>
+                  <Icon className="w-10 h-10 mb-4 text-klaxosaur-blue" strokeWidth={1.5} />
+                  <CardTitle className="text-black-rock">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-green-gecko">
+                  <CardDescription className="text-western-pursuit">
                     {feature.description}
                   </CardDescription>
                 </CardContent>

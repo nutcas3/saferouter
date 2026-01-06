@@ -53,13 +53,13 @@ const plans = [
 
 export function Pricing() {
   return (
-    <div className="py-24 bg-kyuri-green/20">
+    <div className="py-24 bg-ghost-grey">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-black-rock mb-4">
             Flexible Pricing for Every Team
           </h2>
-          <p className="text-xl text-green-gecko max-w-2xl mx-auto">
+          <p className="text-xl text-slate-shadow max-w-2xl mx-auto">
             Start with open source, scale with managed cloud, or go enterprise
           </p>
         </div>
@@ -70,34 +70,34 @@ export function Pricing() {
               key={index} 
               className={`${
                 plan.highlighted 
-                  ? 'bg-macaw-green/20 border-macaw-green shadow-lg scale-105' 
-                  : 'bg-kyuri-green/40 border-dirty-green/50'
+                  ? 'bg-klaxosaur-blue/10 border-klaxosaur-blue shadow-lg scale-105' 
+                  : 'bg-blue-silk/20 border-blue-silk'
               } transition-all`}
             >
               <CardHeader>
-                <CardTitle className="text-2xl text-white">{plan.name}</CardTitle>
-                <CardDescription className="text-green-gecko">
+                <CardTitle className="text-2xl text-black-rock">{plan.name}</CardTitle>
+                <CardDescription className="text-western-pursuit">
                   {plan.description}
                 </CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
-                  {plan.period && <span className="text-green-gecko">{plan.period}</span>}
+                  <span className="text-4xl font-bold text-black-rock">{plan.price}</span>
+                  {plan.period && <span className="text-slate-shadow">{plan.period}</span>}
                 </div>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-macaw-green flex-shrink-0 mt-0.5" strokeWidth={2} />
-                      <span className="text-green-gecko text-sm">{feature}</span>
+                      <Check className="w-5 h-5 text-klaxosaur-blue flex-shrink-0 mt-0.5" strokeWidth={2} />
+                      <span className="text-slate-shadow text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <Button 
                   className={`w-full ${
                     plan.highlighted
-                      ? 'bg-macaw-green hover:bg-dirty-green text-white'
-                      : 'bg-kyuri-green hover:bg-dirty-green text-white'
+                      ? 'bg-retro-nectarine hover:bg-retro-nectarine/90 text-white'
+                      : 'bg-klaxosaur-blue hover:bg-klaxosaur-blue/90 text-white'
                   } font-semibold`}
                   onClick={() => {
                     if (plan.name === 'Open Source') {
@@ -117,7 +117,7 @@ export function Pricing() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-green-gecko">
+          <p className="text-slate-shadow">
             All plans include core privacy features. Enterprise plans get custom SLAs and dedicated support.
           </p>
         </div>

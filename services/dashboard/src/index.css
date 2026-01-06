@@ -41,25 +41,35 @@
       linear-gradient(to bottom, rgba(244, 244, 207, 0.03) 1px, transparent 1px);
   }
   
-  .text-moon-glow { color: var(--moon-glow); }
-  .text-green-gecko { color: var(--green-gecko); }
-  .text-macaw-green { color: var(--macaw-green); }
-  .text-dirty-green { color: var(--dirty-green); }
-  .text-kyuri-green { color: var(--kyuri-green); }
-  .text-darkest-forest { color: var(--darkest-forest); }
-  
-  .bg-moon-glow { background-color: var(--moon-glow); }
-  .bg-green-gecko { background-color: var(--green-gecko); }
-  .bg-macaw-green { background-color: var(--macaw-green); }
-  .bg-dirty-green { background-color: var(--dirty-green); }
-  .bg-kyuri-green { background-color: var(--kyuri-green); }
-  .bg-darkest-forest { background-color: var(--darkest-forest); }
-  
-  .border-moon-glow { border-color: var(--moon-glow); }
-  .border-green-gecko { border-color: var(--green-gecko); }
-  .border-macaw-green { border-color: var(--macaw-green); }
-  .border-dirty-green { border-color: var(--dirty-green); }
+  .bg-black-rock { background-color: var(--black-rock); }
+  .bg-klaxosaur-blue { background-color: var(--klaxosaur-blue); }
+  .bg-retro-nectarine { background-color: var(--retro-nectarine); }
+  .bg-blue-silk { background-color: var(--blue-silk); }
+  .bg-just-rosey { background-color: var(--just-rosey); }
+  .bg-western-pursuit { background-color: var(--western-pursuit); }
+  .bg-ghost-grey { background-color: var(--ghost-grey); }
+  .bg-slate-shadow { background-color: var(--slate-shadow); }
+  .bg-true-deep { background-color: var(--true-deep); }
+
+  .text-black-rock { color: var(--black-rock); }
+  .text-klaxosaur-blue { color: var(--klaxosaur-blue); }
+  .text-retro-nectarine { color: var(--retro-nectarine); }
+  .text-blue-silk { color: var(--blue-silk); }
+  .text-just-rosey { color: var(--just-rosey); }
+  .text-western-pursuit { color: var(--western-pursuit); }
+  .text-slate-shadow { color: var(--slate-shadow); }
+  .text-true-deep { color: var(--true-deep); }
+
+  .border-black-rock { border-color: var(--black-rock); }
+  .border-klaxosaur-blue { border-color: var(--klaxosaur-blue); }
+  .border-retro-nectarine { border-color: var(--retro-nectarine); }
+  .border-blue-silk { border-color: var(--blue-silk); }
+  .border-just-rosey { border-color: var(--just-rosey); }
+  .border-western-pursuit { border-color: var(--western-pursuit); }
+  .border-slate-shadow { border-color: var(--slate-shadow); }
+  .border-true-deep { border-color: var(--true-deep); }
 }
+
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
