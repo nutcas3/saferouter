@@ -32,7 +32,7 @@ pub struct VaultState {
     pub ttl_seconds: u64,
 }
 
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct StoreRequest {
     pub request_id: String,
     pub entities: Vec<Entity>,
