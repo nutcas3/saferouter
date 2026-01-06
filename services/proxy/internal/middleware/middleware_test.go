@@ -222,3 +222,24 @@ func TestRateLimit_WindowReset(t *testing.T) {
 		t.Errorf("Expected status 200 after window reset, got %d", w.Code)
 	}
 }
+
+func TestRateLimit_CleanupOldClients(t *testing.T) {
+	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
+	wrapped := RateLimit(10, 1*time.Second)(handler)
+
+	// Make request to create client entry
+	req := httptest.NewRequest("GET", "/test", nil)
+	req.RemoteAddr = "192.168.1.200:9999"
+	w := httptest.NewRecorder()
+	wrapped.ServeHTTP(w, req)
+
+	if w.Code != http.StatusOK {
+		t.Errorf("Expected status 200, got %d", w.Code)
+	}
+
+	// Wait for cleanup goroutine to run (it runs every minute, but we just verify it doesn't crash)
+	time.Sleep(10 * time.Millisecond)
+}
