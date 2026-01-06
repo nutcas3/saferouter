@@ -57,8 +57,8 @@ async fn test_health_endpoint() {
     assert!(resp.status().is_success());
 }
 
-#[test]
-fn test_encryption_decryption() {
+#[actix_web::test]
+async fn test_encryption_decryption() {
     let master_key = vec![0u8; 32];
     let vault_state = VaultState::new(master_key, 60);
     
@@ -69,8 +69,8 @@ fn test_encryption_decryption() {
     assert_eq!(plaintext, &decrypted[..]);
 }
 
-#[test]
-fn test_invalid_decryption() {
+#[actix_web::test]
+async fn test_invalid_decryption() {
     let master_key = vec![0u8; 32];
     let vault_state = VaultState::new(master_key, 60);
     
