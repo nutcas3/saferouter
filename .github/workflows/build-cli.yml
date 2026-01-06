@@ -15,29 +15,82 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
 
 jobs:
+  test:
+    name: Test CLI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Cache cargo git
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-git-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Cache cargo build
+        uses: actions/cache@v4
+        with:
+          path: cli/target
+          key: ${{ runner.os }}-cargo-build-test-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Check formatting
+        working-directory: ./cli
+        run: cargo fmt --all -- --check
+
+      - name: Run clippy
+        working-directory: ./cli
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Run tests
+        working-directory: ./cli
+        run: cargo test --verbose
+
+      - name: Run doc tests
+        working-directory: ./cli
+        run: cargo test --doc
+
   build:
     name: Build CLI - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    needs: test
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            artifact_name: saferoute-cli-linux-amd64
+            artifact_name: saferoute-linux-amd64
+            binary_name: saferoute
           - os: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            artifact_name: saferoute-cli-linux-arm64
+            artifact_name: saferoute-linux-arm64
+            binary_name: saferoute
           - os: macos-latest
             target: x86_64-apple-darwin
-            artifact_name: saferoute-cli-macos-amd64
+            artifact_name: saferoute-macos-amd64
+            binary_name: saferoute
           - os: macos-latest
             target: aarch64-apple-darwin
-            artifact_name: saferoute-cli-macos-arm64
+            artifact_name: saferoute-macos-arm64
+            binary_name: saferoute
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-            artifact_name: saferoute-cli-windows-amd64.exe
+            artifact_name: saferoute-windows-amd64.exe
+            binary_name: saferoute.exe
 
     steps:
       - name: Checkout code
@@ -82,30 +135,45 @@ jobs:
         working-directory: ./cli
         run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Run tests
-        if: matrix.target == 'x86_64-unknown-linux-gnu' || matrix.target == 'x86_64-apple-darwin' || matrix.target == 'x86_64-pc-windows-msvc'
+      - name: Verify binary
         working-directory: ./cli
-        run: cargo test --release --target ${{ matrix.target }}
+        run: |
+          ls -la target/${{ matrix.target }}/release/${{ matrix.binary_name }}
 
       - name: Strip binary (Unix)
         if: runner.os != 'Windows'
-        run: strip cli/target/${{ matrix.target }}/release/saferoute-cli
+        run: strip cli/target/${{ matrix.target }}/release/${{ matrix.binary_name }}
 
       - name: Rename binary (Unix)
         if: runner.os != 'Windows'
         run: |
-          cp cli/target/${{ matrix.target }}/release/saferoute-cli ${{ matrix.artifact_name }}
+          cp cli/target/${{ matrix.target }}/release/${{ matrix.binary_name }} ${{ matrix.artifact_name }}
 
       - name: Rename binary (Windows)
         if: runner.os == 'Windows'
         run: |
-          copy cli\target\${{ matrix.target }}\release\saferoute-cli.exe ${{ matrix.artifact_name }}
+          copy cli\target\${{ matrix.target }}\release\${{ matrix.binary_name }} ${{ matrix.artifact_name }}
 
-      - name: Upload artifact
+      - name: Create checksum
+        run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            certutil -hashfile ${{ matrix.artifact_name }} SHA256 > ${{ matrix.artifact_name }}.sha256
+          else
+            sha256sum ${{ matrix.artifact_name }} > ${{ matrix.artifact_name }}.sha256
+          fi
+
+      - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}
           path: ${{ matrix.artifact_name }}
+          retention-days: 30
+
+      - name: Upload checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}-sha256
+          path: ${{ matrix.artifact_name }}.sha256
           retention-days: 30
 
   release:
@@ -119,20 +187,18 @@ jobs:
         with:
           path: ./artifacts
 
-      - name: Create checksums
+      - name: Create release checksums
         run: |
           cd artifacts
-          for dir in */; do
-            cd "$dir"
-            sha256sum * > checksums.txt
-            cd ..
-          done
+          find . -name "*.sha256" -exec cat {} \; > checksums.txt
+          cat checksums.txt
 
       - name: Upload release assets
         uses: softprops/action-gh-release@v1
         with:
           files: |
             artifacts/**/*
+            checksums.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

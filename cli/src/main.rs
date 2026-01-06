@@ -1,158 +1,197 @@
 use clap::{Parser, Subcommand};
 use colored::Colorize;
-use std::process::Command;
+use saferoute::{Config, DockerClient, Result};
+use tracing::{info, error};
+use tracing_subscriber;
 
 #[derive(Parser)]
 #[command(name = "saferoute")]
 #[command(about = "Zero-knowledge privacy proxy for LLMs", long_about = None)]
+#[command(version = "1.0.0")]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
+    
+    #[arg(short, long, global = true)]
+    verbose: bool,
 }
 
 #[derive(Subcommand)]
 enum Commands {
     Start {
-        #[arg(short, long, default_value = "false")]
+        #[arg(short, long)]
         detached: bool,
     },
-    Stop,
+    Stop {
+        #[arg(short, long)]
+        volumes: bool,
+    },
     Status,
     Logs {
         #[arg(short, long)]
         follow: bool,
+        #[arg(short, long)]
+        service: Option<String>,
     },
     Install,
     Uninstall,
+    Health,
 }
 
 #[tokio::main]
 async fn main() {
     let cli = Cli::parse();
+    
+    let log_level = if cli.verbose { "debug" } else { "info" };
+    tracing_subscriber::fmt()
+        .with_env_filter(log_level)
+        .init();
 
-    match cli.command {
+    let result = match cli.command {
         Commands::Start { detached } => start_services(detached),
-        Commands::Stop => stop_services(),
+        Commands::Stop { volumes } => stop_services(volumes),
         Commands::Status => show_status(),
-        Commands::Logs { follow } => show_logs(follow),
+        Commands::Logs { follow, service } => show_logs(follow, service.as_deref()),
         Commands::Install => install(),
         Commands::Uninstall => uninstall(),
+        Commands::Health => health_check().await,
+    };
+    
+    if let Err(e) = result {
+        error!("{}", e);
+        std::process::exit(1);
     }
 }
 
-fn start_services(detached: bool) {
+fn start_services(detached: bool) -> Result<()> {
     println!("{}", "Starting SafeRoute services...".green().bold());
     
-    let mut cmd = Command::new("docker-compose");
-    cmd.arg("up");
+    let config = Config::load()?;
+    config.validate_docker_compose()?;
+    config.ensure_env_file()?;
+    
+    let docker = DockerClient::new();
+    docker.check_installed()?;
+    docker.check_compose_installed()?;
+    
+    docker.compose_up(detached)?;
+    
+    println!("{}", "✓ SafeRoute started successfully".green());
+    println!("\n{}", "Services available at:".bold());
+    println!("  {} http://localhost:8080", "Proxy:".cyan());
+    println!("  {} http://localhost:3000", "Dashboard:".cyan());
+    println!("  {} http://localhost:9090", "Prometheus:".cyan());
+    println!("  {} http://localhost:3001", "Grafana:".cyan());
     
     if detached {
-        cmd.arg("-d");
+        println!("\n{}", "Tip: Run 'saferoute logs -f' to view logs".dimmed());
     }
     
-    match cmd.status() {
-        Ok(status) if status.success() => {
-            println!("{}", "SafeRoute started successfully".green());
-            println!("\n{}", "Services available at:".bold());
-            println!("  {} http://localhost:8080", "Proxy:".cyan());
-            println!("  {} http://localhost:3000", "Dashboard:".cyan());
-            println!("  {} http://localhost:9090", "Prometheus:".cyan());
-            println!("  {} http://localhost:3001", "Grafana:".cyan());
-        }
-        Ok(_) => println!("{}", "Failed to start services".red()),
-        Err(e) => println!("{} {}", "Error:".red(), e),
-    }
+    Ok(())
 }
 
-fn stop_services() {
+fn stop_services(volumes: bool) -> Result<()> {
     println!("{}", "Stopping SafeRoute services...".yellow().bold());
     
-    match Command::new("docker-compose").arg("down").status() {
-        Ok(status) if status.success() => {
-            println!("{}", "SafeRoute stopped".green());
-        }
-        Ok(_) => println!("{}", "Failed to stop services".red()),
-        Err(e) => println!("{} {}", "Error:".red(), e),
+    let docker = DockerClient::new();
+    docker.compose_down(volumes)?;
+    
+    println!("{}", "✓ SafeRoute stopped".green());
+    
+    if volumes {
+        println!("{}", "  (volumes removed)".dimmed());
     }
+    
+    Ok(())
 }
 
-fn show_status() {
+fn show_status() -> Result<()> {
     println!("{}", "SafeRoute Status".cyan().bold());
     println!();
     
-    let _ = Command::new("docker-compose")
-        .arg("ps")
-        .status();
+    let docker = DockerClient::new();
+    docker.compose_ps()?;
+    
+    Ok(())
 }
 
-fn show_logs(follow: bool) {
-    let mut cmd = Command::new("docker-compose");
-    cmd.arg("logs");
-    
-    if follow {
-        cmd.arg("-f");
-    }
-    
-    let _ = cmd.status();
+fn show_logs(follow: bool, service: Option<&str>) -> Result<()> {
+    let docker = DockerClient::new();
+    docker.compose_logs(follow, service)?;
+    Ok(())
 }
 
-fn install() {
+fn install() -> Result<()> {
     println!("{}", "Installing SafeRoute...".green().bold());
     println!();
     
+    let config = Config::load()?;
+    let docker = DockerClient::new();
+    
     println!("1. Checking Docker...");
-    if !check_docker() {
-        println!("{}", "Docker not found. Please install Docker first.".red());
-        return;
-    }
-    println!("{}", "Docker installed".green());
+    docker.check_installed()?;
+    docker.check_compose_installed()?;
+    println!("{}", "  ✓ Docker installed".green());
     
-    println!("2. Creating configuration...");
-    create_env_file();
-    println!("{}", "Configuration created".green());
+    println!("2. Validating project structure...");
+    config.validate_docker_compose()?;
+    println!("{}", "  ✓ Project structure valid".green());
     
-    println!("3. Building services...");
-    match Command::new("docker-compose").arg("build").status() {
-        Ok(status) if status.success() => {
-            println!("{}", "Services built".green());
-        }
-        _ => {
-            println!("{}", "Build failed".red());
-            return;
-        }
-    }
+    println!("3. Creating configuration...");
+    config.ensure_env_file()?;
+    println!("{}", "  ✓ Configuration created".green());
+    
+    println!("4. Building services...");
+    docker.compose_build()?;
+    println!("{}", "  ✓ Services built".green());
     
     println!();
-    println!("{}", "Installation complete!".green().bold());
+    println!("{}", "✓ Installation complete!".green().bold());
     println!();
     println!("Next steps:");
     println!("  1. Edit .env and add your API keys");
-    println!("  2. Run: saferoute start");
+    println!("  2. Run: {} to start services", "saferoute start -d".cyan());
+    println!("  3. Run: {} to check status", "saferoute status".cyan());
+    
+    Ok(())
 }
 
-fn uninstall() {
+fn uninstall() -> Result<()> {
     println!("{}", "Uninstalling SafeRoute...".yellow().bold());
     
-    let _ = Command::new("docker-compose")
-        .arg("down")
-        .arg("-v")
-        .status();
+    let docker = DockerClient::new();
+    docker.compose_down(true)?;
     
-    println!("{}", "SafeRoute uninstalled".green());
+    println!("{}", "✓ SafeRoute uninstalled (volumes removed)".green());
+    println!("{}", "  Note: .env file preserved".dimmed());
+    
+    Ok(())
 }
 
-fn check_docker() -> bool {
-    Command::new("docker")
-        .arg("--version")
-        .output()
-        .is_ok()
-}
-
-fn create_env_file() {
-    use std::fs;
-    use std::path::Path;
+async fn health_check() -> Result<()> {
+    use reqwest::Client;
     
-    if !Path::new(".env").exists() {
-        let _ = fs::copy(".env.example", ".env");
+    println!("{}", "Running health checks...".cyan().bold());
+    println!();
+    
+    let client = Client::new();
+    let services = vec![
+        ("Proxy", "http://localhost:8080/health"),
+        ("NER Service", "http://localhost:8081/health"),
+        ("Vault", "http://localhost:8082/health"),
+        ("Dashboard", "http://localhost:3000/health"),
+    ];
+    
+    for (name, url) in services {
+        match client.get(url).send().await {
+            Ok(resp) if resp.status().is_success() => {
+                println!("  {} {}", "✓".green(), name);
+            }
+            _ => {
+                println!("  {} {} (not responding)", "✗".red(), name);
+            }
+        }
     }
+    
+    Ok(())
 }
