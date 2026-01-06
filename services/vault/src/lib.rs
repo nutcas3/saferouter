@@ -122,7 +122,7 @@ pub fn cleanup_expired(storage: &Arc<DashMap<String, EncryptedData>>) {
     
     for key in expired {
         storage.remove(&key);
-        info!("🗑️  Auto-purged expired entry: {}", key);
+        info!("Auto-purged expired entry: {}", key);
     }
 }
 
@@ -157,7 +157,7 @@ pub async fn store_entities(
     
     state.storage.insert(req.request_id.clone(), encrypted_data);
     
-    info!("✓ Stored {} entities for {} in {:?}", 
+    info!("Stored {} entities for {} in {:?}", 
         req.entities.len(), req.request_id, start.elapsed());
     
     HttpResponse::Ok().json(StoreResponse {
@@ -200,7 +200,7 @@ pub async fn retrieve_entities(
         }
     };
     
-    info!("✓ Retrieved {} entities for {}", entities.len(), request_id);
+    info!("Retrieved {} entities for {}", entities.len(), request_id);
     
     HttpResponse::Ok().json(RetrieveResponse { entities })
 }
