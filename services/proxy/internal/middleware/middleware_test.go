@@ -54,7 +54,7 @@ func TestRateLimit(t *testing.T) {
 	wrapped := RateLimit(2, 1*time.Second)(handler)
 
 	// First two requests should succeed
-	for i := 0; i < 2; i++ {
+	for i := range 2 {
 		req := httptest.NewRequest("GET", "/test", nil)
 		w := httptest.NewRecorder()
 		wrapped.ServeHTTP(w, req)
