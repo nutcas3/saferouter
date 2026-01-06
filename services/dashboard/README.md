@@ -1,75 +1,126 @@
-# React + TypeScript + Vite
+# SafeRoute Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern, production-ready React dashboard for SafeRoute - Zero-knowledge privacy proxy for LLMs.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** with TypeScript
+- **Vite** (Rolldown) for blazing-fast builds
+- **Tailwind CSS v4** for styling
+- **shadcn/ui** components
+- **Lucide React** icons
+- **React Compiler** for optimized performance
 
-## React Compiler
+## Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- Royal Gold Palette (Jewel Tones aesthetic)
+- Fully responsive design
+- Error boundaries for graceful error handling
+- SEO optimized with meta tags
+- Production-ready Docker setup
+- Analytics integration ready
+- Code splitting and lazy loading
+- Security headers configured
 
-Note: This will impact Vite dev & build performances.
+## Quick Start
 
-## Expanding the ESLint configuration
+### Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun install
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Production Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun run type-check
+bun run lint
+bun run build:prod
+bun run preview
 ```
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+```env
+VITE_API_URL=http://localhost:8080  # SafeRoute API endpoint
+VITE_ENV=production
+VITE_GA_TRACKING_ID=               # Optional: Google Analytics
+VITE_POSTHOG_KEY=                  # Optional: PostHog analytics
+```
+
+## Docker Deployment
+
+```bash
+docker build -t saferoute-dashboard:latest .
+
+# Run container
+docker run -d -p 3000:3000 --name saferoute-dashboard saferoute-dashboard:latest
+
+# Health check
+curl http://localhost:3000/health
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── ui/              # shadcn/ui components
+│   ├── Hero.tsx         # Landing page hero
+│   ├── Features.tsx     # Feature showcase
+│   ├── Stats.tsx        # Trust metrics
+│   ├── Demo.tsx         # Interactive PII demo
+│   ├── Pricing.tsx      # Pricing tiers
+│   ├── Testimonials.tsx # Customer quotes
+│   ├── CTA.tsx          # Call to action
+│   ├── Footer.tsx       # Footer links
+│   ├── ErrorBoundary.tsx # Error handling
+│   └── LoadingSpinner.tsx # Loading state
+├── utils/
+│   └── analytics.ts     # Analytics tracking
+├── App.tsx              # Main app component
+├── main.tsx             # Entry point
+└── index.css            # Global styles + Royal Gold Palette
+```
+
+## Color Palette
+
+The dashboard uses a sophisticated **Royal Gold Palette** with jewel tones:
+
+- **Voodoo** (#422b42) - Deep backgrounds
+- **Royal Lilac** (#7f549f) - Primary brand color
+- **Elysium Gold** (#d19502) - High-end accents/CTAs
+- **Viola** (#9271b8) - Secondary accents
+- **Night White** (#e2e0de) - Main background
+- **Cookie Dough** (#a57001) - Muted accents/borders
+
+## Performance
+
+- Code splitting with React vendor chunks
+- Lazy loading for analytics
+- Optimized font loading
+- Gzip compression enabled
+- Static asset caching (1 year)
+- Sub-second initial load time
+
+## Security
+
+- CSP headers configured
+- XSS protection enabled
+- Frame options set to SAMEORIGIN
+- No source maps in production
+- Environment variables not exposed
+
+## Documentation
+
+- [Deployment Guide](./DEPLOYMENT.md) - Production deployment instructions
+- [Main README](../../README.md) - Full project documentation
+
+## Support
+
+- GitHub: https://github.com/saferoute/saferoute
+- Email: support@saferoute.io
+- Docs: https://docs.saferoute.io

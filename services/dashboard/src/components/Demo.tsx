@@ -28,6 +28,13 @@ export function Demo() {
         const data = await response.json()
         setAnonymizedText(data.anonymized_text)
         setDetectedCount(data.entities_count)
+        
+        // Track successful demo usage
+        if (typeof window !== 'undefined' && import.meta.env.VITE_ENV === 'production') {
+          import('../utils/analytics').then(({ analytics }) => {
+            analytics.trackDemoUsage('anonymize')
+          })
+        }
       } else {
         setAnonymizedText('Error: Could not connect to SafeRoute API. Make sure services are running.')
       }
@@ -42,6 +49,13 @@ export function Demo() {
     setInputText(exampleText)
     setAnonymizedText('')
     setDetectedCount(0)
+    
+    // Track reset action
+    if (typeof window !== 'undefined' && import.meta.env.VITE_ENV === 'production') {
+      import('../utils/analytics').then(({ analytics }) => {
+        analytics.trackDemoUsage('reset')
+      })
+    }
   }
 
   return (

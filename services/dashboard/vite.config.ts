@@ -18,4 +18,32 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    sourcemap: false,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor'
+            }
+            if (id.includes('lucide-react')) {
+              return 'icons'
+            }
+            return 'vendor'
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+  },
+  server: {
+    port: 3000,
+    host: true,
+  },
+  preview: {
+    port: 3000,
+    host: true,
+  },
 })

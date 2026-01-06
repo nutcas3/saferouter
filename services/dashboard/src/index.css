@@ -1,19 +1,18 @@
 @import "tailwindcss";
 
-@theme {
-  /* Royal Gold Palette - Jewel Tones */
-  --color-voodoo: #422b42;
-  --color-royal-lilac: #7f549f;
-  --color-elysium-gold: #d19502;
-  --color-viola: #9271b8;
-  --color-night-white: #e2e0de;
-  --color-cookie-dough: #a57001;
-  --color-voodoo-darker: #2d1e2d;
-  --color-voodoo-text: #1a111a;
-}
-
 @layer base {
   :root {
+    /* Royal Gold Palette - Jewel Tones */
+    --color-voodoo: #422b42;
+    --color-royal-lilac: #7f549f;
+    --color-elysium-gold: #d19502;
+    --color-viola: #9271b8;
+    --color-night-white: #e2e0de;
+    --color-cookie-dough: #a57001;
+    --color-voodoo-darker: #2d1e2d;
+    --color-voodoo-text: #1a111a;
+    
+    /* Legacy colors (for compatibility) */
     --moon-glow: #f4f4cf;
     --green-gecko: #cad37d;
     --macaw-green: #9fa83e;
