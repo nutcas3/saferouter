@@ -4,24 +4,105 @@
 
 ## Quick Start
 
-Install with one command:
+### Option 1: Pre-built CLI (Recommended)
 
 ```bash
-curl -sL https://get.saferoute.sh | sh
+cd cli && cargo build --release
+sudo cp cli/target/release/saferoute /usr/local/bin/
+
+saferoute install
+saferoute start -d
 ```
 
-Then:
+### Option 2: Build from Source
 
 ```bash
-saferoute install
-saferoute start
+git clone https://github.com/saferoute/saferoute.git
+cd saferoute
+make build
+make up
+```
+
+### Option 3: Docker Compose
+
+```bash
+git clone https://github.com/saferoute/saferoute.git
+cd saferouter
+docker compose up -d
 ```
 
 Access at:
+- **Main App**: http://localhost (Caddy reverse proxy)
 - **Proxy**: http://localhost:8080
 - **Dashboard**: http://localhost:3000
 - **Prometheus**: http://localhost:9090
 - **Grafana**: http://localhost:3001
+
+## Build and Testing Instructions
+
+### CLI Build
+
+```bash
+# Development build
+cd cli && cargo build
+
+# Release build (optimized)
+cd cli && cargo build --release
+
+# Run tests
+cd cli && cargo test
+
+# Cross-platform builds
+cargo build --release --target x86_64-unknown-linux-gnu
+cargo build --release --target aarch64-apple-darwin
+cargo build --release --target x86_64-pc-windows-msvc
+```
+
+### Service Builds
+
+```bash
+# All services
+make build
+
+# Individual services
+cd services/ner-service && uv build
+cd services/proxy && go build ./...
+cd services/vault && cargo build --release
+cd services/dashboard && bun run build
+```
+
+### Testing
+
+```bash
+# Run all tests
+make test
+
+# Individual service tests
+cd cli && cargo test
+cd services/ner-service && uv run pytest
+cd services/proxy && go test ./...
+cd services/vault && cargo test
+```
+
+## Development
+
+```bash
+# Install CLI
+cd cli && cargo build --release
+sudo cp cli/target/release/saferoute /usr/local/bin/
+
+# Development workflow
+saferoute install
+saferoute start -d
+saferoute logs -f
+saferoute health
+
+# Run tests
+make test
+
+# Stop services
+saferoute stop
+```
 
 ## Architecture
 
@@ -78,28 +159,13 @@ Client Response (with original PII)
 ## CLI Commands
 
 ```bash
-# Install SafeRoute
 saferoute install
-
-# Start all services
 saferoute start
-
-# Start in detached mode
 saferoute start --detached
-
-# Stop services
 saferoute stop
-
-# View status
 saferoute status
-
-# View logs
 saferoute logs
-
-# Follow logs
 saferoute logs --follow
-
-# Uninstall
 saferoute uninstall
 ```
 
@@ -254,17 +320,17 @@ Prometheus metrics endpoint.
 - **Logs**: Zero PII in logs
 
 ### Compliance
-- ✅ HIPAA compliant
-- ✅ GDPR compliant
-- ✅ SOC 2 ready
-- ✅ Zero-knowledge architecture
+- [ ] HIPAA compliant
+- [x] GDPR compliant
+- [x] SOC 2 ready
+- [x] Zero-knowledge architecture
 
 ### Threat Protection
-- ✅ Data breaches (encrypted storage)
-- ✅ Insider threats (no persistent logs)
-- ✅ Man-in-the-middle (TLS 1.3)
-- ✅ Replay attacks (unique request IDs)
-- ✅ Side-channel attacks (constant-time crypto)
+- [x] Data breaches (encrypted storage)
+- [x] Insider threats (no persistent logs)
+- [x] Man-in-the-middle (TLS 1.3)
+- [x] Replay attacks (unique request IDs)
+- [x] Side-channel attacks (constant-time crypto)
 
 ## Performance
 
