@@ -13,12 +13,12 @@ import (
 )
 
 type ProxyHandler struct {
-	nerClient   *services.NERClient
-	vaultClient *services.VaultClient
-	llmClient   *services.LLMClient
+	nerClient   services.NERService
+	vaultClient services.VaultService
+	llmClient   services.LLMService
 }
 
-func NewProxyHandler(ner *services.NERClient, vault *services.VaultClient, llm *services.LLMClient) *ProxyHandler {
+func NewProxyHandler(ner services.NERService, vault services.VaultService, llm services.LLMService) *ProxyHandler {
 	return &ProxyHandler{
 		nerClient:   ner,
 		vaultClient: vault,
