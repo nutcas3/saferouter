@@ -36,7 +36,7 @@ const features = [
 
 export function Features() {
   return (
-    <div className="py-24 bg-ghost-grey">
+    <div className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-black-rock mb-4">
@@ -51,13 +51,13 @@ export function Features() {
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <Card key={index} className="bg-blue-silk/20 border-blue-silk hover:border-klaxosaur-blue transition-all">
+              <Card key={index} className="bg-white border-blue-silk">
                 <CardHeader>
                   <Icon className="w-10 h-10 mb-4 text-klaxosaur-blue" strokeWidth={1.5} />
                   <CardTitle className="text-black-rock">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-western-pursuit">
+                  <CardDescription className="text-slate-shadow">
                     {feature.description}
                   </CardDescription>
                 </CardContent>

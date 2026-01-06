@@ -20,7 +20,7 @@ export function Hero() {
             </span>
           </h1>
           
-          <p className="text-xl text-slate-shadow max-w-2xl mx-auto mb-10">
+          <p className="text-xl text-blue-silk max-w-2xl mx-auto mb-10">
             Enterprise-grade privacy middleware that strips sensitive data before sending to LLMs 
             and restores it on the way back. HIPAA & GDPR compliant.
           </p>
@@ -28,7 +28,7 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               size="lg" 
-              className="bg-retro-nectarine hover:bg-retro-nectarine/90 text-white px-8 py-6 text-lg font-semibold"
+              className="bg-retro-nectarine text-white px-8 py-6 text-lg font-semibold"
               onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Try Live Demo
@@ -36,7 +36,7 @@ export function Hero() {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-blue-silk text-blue-silk hover:bg-klaxosaur-blue/20 px-8 py-6 text-lg font-medium"
+              className="border-klaxosaur-blue text-klaxosaur-blue px-8 py-6 text-lg font-medium"
               onClick={() => window.open('https://github.com/saferoute/saferoute', '_blank')}
             >
               View on GitHub

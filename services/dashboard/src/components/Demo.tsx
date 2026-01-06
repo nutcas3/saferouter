@@ -45,18 +45,18 @@ export function Demo() {
   }
 
   return (
-    <div id="demo" className="py-24 bg-black-rock">
+    <div id="demo" className="py-24 bg-ghost-grey">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-black-rock mb-4">
             Try It Live
           </h2>
-          <p className="text-xl text-blue-silk">
+          <p className="text-xl text-slate-shadow">
             See how SafeRoute detects and anonymizes PII in real-time
           </p>
         </div>
 
-        <Card className="bg-slate-shadow/40 border-blue-silk/30">
+        <Card className="bg-black-rock border-blue-silk/30">
           <CardHeader>
             <CardTitle className="text-white">Interactive Demo</CardTitle>
             <CardDescription className="text-blue-silk">
@@ -81,14 +81,14 @@ export function Demo() {
               <Button
                 onClick={handleAnonymize}
                 disabled={loading || !inputText}
-                className="bg-retro-nectarine hover:bg-retro-nectarine/90 text-white font-semibold"
+                className="bg-retro-nectarine text-white font-semibold"
               >
                 {loading ? 'Processing...' : 'Anonymize PII'}
               </Button>
               <Button
                 onClick={handleReset}
                 variant="outline"
-                className="border-blue-silk text-blue-silk hover:bg-klaxosaur-blue/20 font-medium"
+                className="border-blue-silk text-blue-silk font-medium"
               >
                 Reset
               </Button>
@@ -132,34 +132,34 @@ export function Demo() {
         </Card>
 
         <div className="mt-12 grid md:grid-cols-3 gap-6">
-          <Card className="bg-kyuri-green/40 border-dirty-green/50">
+          <Card className="bg-white border-blue-silk">
             <CardHeader>
-              <CardTitle className="text-lg text-black">1. Detect</CardTitle>
+              <CardTitle className="text-lg text-black-rock">1. Detect</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-green-gecko">
+              <p className="text-sm text-just-rosey">
                 NER service scans text for PII patterns using JAX-powered regex
               </p>
             </CardContent>
           </Card>
           
-          <Card className="bg-kyuri-green/40 border-dirty-green/50">
+          <Card className="bg-white border-blue-silk">
             <CardHeader>
-              <CardTitle className="text-lg text-black">2. Encrypt</CardTitle>
+              <CardTitle className="text-lg text-black-rock">2. Encrypt</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-green-gecko">
+              <p className="text-sm text-just-rosey">
                 Vault stores encrypted entities with AES-256-GCM, 60s TTL
               </p>
             </CardContent>
           </Card>
           
-          <Card className="bg-kyuri-green/40 border-dirty-green/50">
+          <Card className="bg-white border-blue-silk">
             <CardHeader>
-              <CardTitle className="text-lg text-black">3. Restore</CardTitle>
+              <CardTitle className="text-lg text-black-rock">3. Restore</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-green-gecko">
+              <p className="text-sm text-just-rosey">
                 Original PII restored in LLM response, then auto-purged
               </p>
             </CardContent>

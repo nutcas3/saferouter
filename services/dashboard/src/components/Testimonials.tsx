@@ -21,7 +21,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <div className="py-24 bg-white">
+    <div className="py-24" style={{ backgroundColor: 'rgba(197, 163, 147, 0.1)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-black-rock mb-4">
@@ -34,12 +34,12 @@ export function Testimonials() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-blue-silk/20 border-blue-silk">
+            <Card key={index} className="bg-white border-blue-silk">
               <CardContent className="pt-6">
                 <div className="w-12 h-12 rounded-full bg-klaxosaur-blue/20 flex items-center justify-center mb-4">
                   <User className="w-6 h-6 text-klaxosaur-blue" strokeWidth={1.5} />
                 </div>
-                <p className="text-slate-shadow mb-6 italic">"{testimonial.quote}"</p>
+                <p className="text-western-pursuit mb-6 italic">"{testimonial.quote}"</p>
                 <div>
                   <p className="text-black-rock font-semibold">{testimonial.author}</p>
                   <p className="text-sm text-western-pursuit">{testimonial.role}</p>

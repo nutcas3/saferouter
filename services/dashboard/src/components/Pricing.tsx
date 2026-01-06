@@ -53,7 +53,7 @@ const plans = [
 
 export function Pricing() {
   return (
-    <div className="py-24 bg-ghost-grey">
+    <div className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-black-rock mb-4">
@@ -70,9 +70,9 @@ export function Pricing() {
               key={index} 
               className={`${
                 plan.highlighted 
-                  ? 'bg-klaxosaur-blue/10 border-klaxosaur-blue shadow-lg scale-105' 
-                  : 'bg-blue-silk/20 border-blue-silk'
-              } transition-all`}
+                  ? 'bg-white border-klaxosaur-blue shadow-lg' 
+                  : 'bg-white border-blue-silk'
+              }`}
             >
               <CardHeader>
                 <CardTitle className="text-2xl text-black-rock">{plan.name}</CardTitle>
@@ -96,8 +96,8 @@ export function Pricing() {
                 <Button 
                   className={`w-full ${
                     plan.highlighted
-                      ? 'bg-retro-nectarine hover:bg-retro-nectarine/90 text-white'
-                      : 'bg-klaxosaur-blue hover:bg-klaxosaur-blue/90 text-white'
+                      ? 'bg-retro-nectarine text-white'
+                      : 'bg-klaxosaur-blue text-white'
                   } font-semibold`}
                   onClick={() => {
                     if (plan.name === 'Open Source') {
