@@ -53,13 +53,13 @@ const plans = [
 
 export function Pricing() {
   return (
-    <div className="py-24 bg-white">
+    <div className="py-24 bg-night-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-black-rock mb-4">
+          <h2 className="text-4xl font-bold text-voodoo mb-4">
             Flexible Pricing for Every Team
           </h2>
-          <p className="text-xl text-slate-shadow max-w-2xl mx-auto">
+          <p className="text-xl text-voodoo max-w-2xl mx-auto" style={{ opacity: 0.8 }}>
             Start with open source, scale with managed cloud, or go enterprise
           </p>
         </div>
@@ -70,34 +70,42 @@ export function Pricing() {
               key={index} 
               className={`${
                 plan.highlighted 
-                  ? 'bg-white border-klaxosaur-blue shadow-lg' 
-                  : 'bg-white border-blue-silk'
+                  ? 'bg-voodoo border-elysium-gold shadow-lg' 
+                  : 'bg-white border-royal-lilac'
               }`}
             >
               <CardHeader>
-                <CardTitle className="text-2xl text-black-rock">{plan.name}</CardTitle>
-                <CardDescription className="text-western-pursuit">
+                <CardTitle className={`text-2xl ${
+                  plan.highlighted ? 'text-night-white' : 'text-voodoo'
+                }`}>{plan.name}</CardTitle>
+                <CardDescription className={plan.highlighted ? 'text-viola' : 'text-voodoo'} style={{ opacity: plan.highlighted ? 1 : 0.7 }}>
                   {plan.description}
                 </CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-black-rock">{plan.price}</span>
-                  {plan.period && <span className="text-slate-shadow">{plan.period}</span>}
+                  <span className={`text-4xl font-bold ${
+                    plan.highlighted ? 'text-elysium-gold' : 'text-royal-lilac'
+                  }`}>{plan.price}</span>
+                  {plan.period && <span className={plan.highlighted ? 'text-viola' : 'text-voodoo'} style={{ opacity: 0.7 }}>{plan.period}</span>}
                 </div>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-klaxosaur-blue flex-shrink-0 mt-0.5" strokeWidth={2} />
-                      <span className="text-slate-shadow text-sm">{feature}</span>
+                      <Check className={`w-5 h-5 ${
+                        plan.highlighted ? 'text-elysium-gold' : 'text-royal-lilac'
+                      } flex-shrink-0 mt-0.5`} strokeWidth={2} />
+                      <span className={`text-sm ${
+                        plan.highlighted ? 'text-night-white' : 'text-voodoo'
+                      }`} style={{ opacity: plan.highlighted ? 0.9 : 0.7 }}>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <Button 
                   className={`w-full ${
                     plan.highlighted
-                      ? 'bg-retro-nectarine text-white'
-                      : 'bg-klaxosaur-blue text-white'
+                      ? 'bg-elysium-gold text-voodoo'
+                      : 'bg-royal-lilac text-white'
                   } font-semibold`}
                   onClick={() => {
                     if (plan.name === 'Open Source') {
@@ -117,7 +125,7 @@ export function Pricing() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-slate-shadow">
+          <p className="text-voodoo" style={{ opacity: 0.7 }}>
             All plans include core privacy features. Enterprise plans get custom SLAs and dedicated support.
           </p>
         </div>

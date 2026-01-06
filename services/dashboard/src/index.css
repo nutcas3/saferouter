@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  /* Royal Gold Palette - Jewel Tones */
+  --color-voodoo: #422b42;
+  --color-royal-lilac: #7f549f;
+  --color-elysium-gold: #d19502;
+  --color-viola: #9271b8;
+  --color-night-white: #e2e0de;
+  --color-cookie-dough: #a57001;
+  --color-voodoo-darker: #2d1e2d;
+  --color-voodoo-text: #1a111a;
+}
+
 @layer base {
   :root {
     --moon-glow: #f4f4cf;
@@ -41,33 +53,28 @@
       linear-gradient(to bottom, rgba(244, 244, 207, 0.03) 1px, transparent 1px);
   }
   
-  .bg-black-rock { background-color: var(--black-rock); }
-  .bg-klaxosaur-blue { background-color: var(--klaxosaur-blue); }
-  .bg-retro-nectarine { background-color: var(--retro-nectarine); }
-  .bg-blue-silk { background-color: var(--blue-silk); }
-  .bg-just-rosey { background-color: var(--just-rosey); }
-  .bg-western-pursuit { background-color: var(--western-pursuit); }
-  .bg-ghost-grey { background-color: var(--ghost-grey); }
-  .bg-slate-shadow { background-color: var(--slate-shadow); }
-  .bg-true-deep { background-color: var(--true-deep); }
+  .bg-voodoo { background-color: var(--color-voodoo); }
+  .bg-royal-lilac { background-color: var(--color-royal-lilac); }
+  .bg-elysium-gold { background-color: var(--color-elysium-gold); }
+  .bg-viola { background-color: var(--color-viola); }
+  .bg-night-white { background-color: var(--color-night-white); }
+  .bg-cookie-dough { background-color: var(--color-cookie-dough); }
+  .bg-voodoo-darker { background-color: var(--color-voodoo-darker); }
 
-  .text-black-rock { color: var(--black-rock); }
-  .text-klaxosaur-blue { color: var(--klaxosaur-blue); }
-  .text-retro-nectarine { color: var(--retro-nectarine); }
-  .text-blue-silk { color: var(--blue-silk); }
-  .text-just-rosey { color: var(--just-rosey); }
-  .text-western-pursuit { color: var(--western-pursuit); }
-  .text-slate-shadow { color: var(--slate-shadow); }
-  .text-true-deep { color: var(--true-deep); }
+  .text-voodoo { color: var(--color-voodoo); }
+  .text-royal-lilac { color: var(--color-royal-lilac); }
+  .text-elysium-gold { color: var(--color-elysium-gold); }
+  .text-viola { color: var(--color-viola); }
+  .text-night-white { color: var(--color-night-white); }
+  .text-cookie-dough { color: var(--color-cookie-dough); }
+  .text-voodoo-text { color: var(--color-voodoo-text); }
 
-  .border-black-rock { border-color: var(--black-rock); }
-  .border-klaxosaur-blue { border-color: var(--klaxosaur-blue); }
-  .border-retro-nectarine { border-color: var(--retro-nectarine); }
-  .border-blue-silk { border-color: var(--blue-silk); }
-  .border-just-rosey { border-color: var(--just-rosey); }
-  .border-western-pursuit { border-color: var(--western-pursuit); }
-  .border-slate-shadow { border-color: var(--slate-shadow); }
-  .border-true-deep { border-color: var(--true-deep); }
+  .border-voodoo { border-color: var(--color-voodoo); }
+  .border-royal-lilac { border-color: var(--color-royal-lilac); }
+  .border-elysium-gold { border-color: var(--color-elysium-gold); }
+  .border-viola { border-color: var(--color-viola); }
+  .border-night-white { border-color: var(--color-night-white); }
+  .border-cookie-dough { border-color: var(--color-cookie-dough); }
 }
 
 @import "tw-animate-css";

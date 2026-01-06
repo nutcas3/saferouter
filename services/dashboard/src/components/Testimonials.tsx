@@ -21,28 +21,32 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <div className="py-24" style={{ backgroundColor: 'rgba(197, 163, 147, 0.1)' }}>
+    <div className="py-24" style={{ backgroundColor: 'rgba(146, 113, 184, 0.08)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-black-rock mb-4">
+          <h2 className="text-4xl font-bold text-voodoo mb-4">
             Loved by Developers & Security Teams
           </h2>
-          <p className="text-xl text-slate-shadow">
+          <p className="text-xl text-voodoo" style={{ opacity: 0.8 }}>
             See what teams are saying about SafeRoute
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-white border-blue-silk">
+            <Card key={index} className="bg-white border-cookie-dough">
               <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-klaxosaur-blue/20 flex items-center justify-center mb-4">
-                  <User className="w-6 h-6 text-klaxosaur-blue" strokeWidth={1.5} />
+                <div className="w-12 h-12 rounded-full bg-royal-lilac/20 flex items-center justify-center mb-4">
+                  <User className="w-6 h-6 text-royal-lilac" strokeWidth={1.5} />
                 </div>
-                <p className="text-western-pursuit mb-6 italic">"{testimonial.quote}"</p>
+                <p className="text-voodoo mb-6 italic" style={{ opacity: 0.8 }}>
+                  <span className="text-cookie-dough text-2xl">"</span>
+                  {testimonial.quote}
+                  <span className="text-cookie-dough text-2xl">"</span>
+                </p>
                 <div>
-                  <p className="text-black-rock font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-western-pursuit">{testimonial.role}</p>
+                  <p className="text-voodoo font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-voodoo" style={{ opacity: 0.6 }}>{testimonial.role}</p>
                 </div>
               </CardContent>
             </Card>
