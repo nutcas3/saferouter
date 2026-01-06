@@ -16,4 +16,5 @@ env_logger = "0.11.8"
 thiserror = "2.0.9"
 
 [dev-dependencies]
-actix-web-test = "0.1.5"
+actix-web = { version = "4.12.1", features = ["macros"] }
+actix-rt = "2.11.0"
