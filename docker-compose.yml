@@ -1,8 +1,24 @@
 services:
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - proxy
+      - dashboard
+    networks:
+      - saferoute
+    restart: unless-stopped
+
   proxy:
     build: ./services/proxy
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     environment:
       NER_SERVICE_URL: http://ner-service:8081
       VAULT_SERVICE_URL: http://vault:8082
@@ -16,6 +32,7 @@ services:
       - redis
     networks:
       - saferoute
+    restart: unless-stopped
 
   ner-service:
     build: ./services/ner-service
@@ -52,14 +69,15 @@ services:
 
   dashboard:
     build: ./services/dashboard
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
-      VITE_API_URL: http://localhost:8080
+      VITE_API_URL: /v1
     depends_on:
       - proxy
     networks:
       - saferoute
+    restart: unless-stopped
 
   redis:
     image: redis:7-alpine
@@ -99,3 +117,5 @@ networks:
 volumes:
   prometheus-data:
   grafana-data:
+  caddy-data:
+  caddy-config:
