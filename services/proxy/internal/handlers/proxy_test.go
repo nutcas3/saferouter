@@ -62,7 +62,6 @@ func (m *mockLLMClient) ChatCompletion(ctx context.Context, req models.ChatCompl
 }
 
 func TestHandleAnonymize(t *testing.T) {
-	// Mock NER and Vault clients
 	var nerClient services.NERService = &mockNERClient{}
 	var vaultClient services.VaultService = &mockVaultClient{}
 	var llmClient services.LLMService = &mockLLMClient{}
@@ -76,6 +75,11 @@ func TestHandleAnonymize(t *testing.T) {
 
 	req := httptest.NewRequest("POST", "/v1/anonymize", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
+
+	// Add request_id to context
+	ctx := context.WithValue(req.Context(), "request_id", "test-request-123")
+	req = req.WithContext(ctx)
+
 	w := httptest.NewRecorder()
 
 	handler.HandleAnonymize(w, req)
@@ -107,6 +111,11 @@ func TestHandleRestore(t *testing.T) {
 
 	req := httptest.NewRequest("POST", "/v1/restore", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
+
+	// Add request_id to context
+	ctx := context.WithValue(req.Context(), "request_id", "test-request-123")
+	req = req.WithContext(ctx)
+
 	w := httptest.NewRecorder()
 
 	handler.HandleRestore(w, req)
