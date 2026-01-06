@@ -2,17 +2,70 @@ package handlers
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/saferoute/proxy/internal/models"
+	"github.com/saferoute/proxy/internal/services"
 )
+
+// Mock implementations
+type mockNERClient struct{}
+
+func (m *mockNERClient) DetectEntities(ctx context.Context, text string) ([]models.Entity, error) {
+	return []models.Entity{
+		{Original: "john@example.com", Token: "[EMAIL_001]", Type: "EMAIL", Position: 12, Confidence: 0.95},
+		{Original: "123-45-6789", Token: "[SSN_001]", Type: "SSN", Position: 40, Confidence: 0.98},
+	}, nil
+}
+
+type mockVaultClient struct{}
+
+func (m *mockVaultClient) StoreEntities(ctx context.Context, requestID string, entities []models.Entity) error {
+	return nil
+}
+
+func (m *mockVaultClient) GetEntities(ctx context.Context, requestID string) ([]models.Entity, error) {
+	return []models.Entity{
+		{Original: "john@example.com", Token: "[EMAIL_001]", Type: "EMAIL", Confidence: 0.95},
+		{Original: "123-45-6789", Token: "[SSN_001]", Type: "SSN", Confidence: 0.98},
+	}, nil
+}
+
+type mockLLMClient struct{}
+
+func (m *mockLLMClient) ChatCompletion(ctx context.Context, req models.ChatCompletionRequest) (models.ChatCompletionResponse, error) {
+	return models.ChatCompletionResponse{
+		ID:      "test-123",
+		Object:  "chat.completion",
+		Created: 1640995200,
+		Model:   "claude-3",
+		Choices: []models.Choice{
+			{
+				Index: 0,
+				Message: models.Message{
+					Role:    "assistant",
+					Content: "LLM response with [EMAIL_001] and [SSN_001]",
+				},
+				FinishReason: "stop",
+			},
+		},
+		Usage: models.Usage{
+			PromptTokens:     10,
+			CompletionTokens: 5,
+			TotalTokens:      15,
+		},
+	}, nil
+}
 
 func TestHandleAnonymize(t *testing.T) {
 	// Mock NER and Vault clients
-	nerClient := &mockNERClient{}
-	vaultClient := &mockVaultClient{}
-	llmClient := &mockLLMClient{}
+	var nerClient services.NERService = &mockNERClient{}
+	var vaultClient services.VaultService = &mockVaultClient{}
+	var llmClient services.LLMService = &mockLLMClient{}
 
 	handler := NewProxyHandler(nerClient, vaultClient, llmClient)
 
@@ -40,9 +93,9 @@ func TestHandleAnonymize(t *testing.T) {
 }
 
 func TestHandleRestore(t *testing.T) {
-	nerClient := &mockNERClient{}
-	vaultClient := &mockVaultClient{}
-	llmClient := &mockLLMClient{}
+	var nerClient services.NERService = &mockNERClient{}
+	var vaultClient services.VaultService = &mockVaultClient{}
+	var llmClient services.LLMService = &mockLLMClient{}
 
 	handler := NewProxyHandler(nerClient, vaultClient, llmClient)
 
@@ -61,40 +114,4 @@ func TestHandleRestore(t *testing.T) {
 	if w.Code != http.StatusOK {
 		t.Errorf("Expected status 200, got %d", w.Code)
 	}
-}
-
-// Mock implementations
-type mockNERClient struct{}
-
-func (m *mockNERClient) DetectEntities(text string, domain string) ([]Entity, error) {
-	return []Entity{
-		{Original: "john@example.com", Token: "[EMAIL_001]", Type: "EMAIL", Position: 12},
-		{Original: "123-45-6789", Token: "[SSN_001]", Type: "SSN", Position: 40},
-	}, nil
-}
-
-type mockVaultClient struct{}
-
-func (m *mockVaultClient) StoreEntities(requestID string, entities []Entity) error {
-	return nil
-}
-
-func (m *mockVaultClient) RetrieveEntities(requestID string) ([]Entity, error) {
-	return []Entity{
-		{Original: "john@example.com", Token: "[EMAIL_001]", Type: "EMAIL"},
-		{Original: "123-45-6789", Token: "[SSN_001]", Type: "SSN"},
-	}, nil
-}
-
-type mockLLMClient struct{}
-
-func (m *mockLLMClient) SendRequest(text string) (string, error) {
-	return "LLM response", nil
-}
-
-type Entity struct {
-	Original string
-	Token    string
-	Type     string
-	Position int
 }
